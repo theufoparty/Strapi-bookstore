@@ -1,0 +1,22 @@
+{
+  "kind": "singleType",
+  "collectionName": "page_themes",
+  "info": {
+    "singularName": "page-theme",
+    "pluralName": "page-themes",
+    "displayName": "PageTheme"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "theme": {
+      "type": "enumeration",
+      "enum": [
+        "lightmode",
+        "darkmode"
+      ]
+    }
+  }
+}

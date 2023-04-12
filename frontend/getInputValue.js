@@ -1,3 +1,3 @@
 const getInputValue = (labelElement) => {
-	return labelElement.querySelector("input").value;
+  return labelElement.querySelector("input").value;
 };

@@ -1,16 +1,10 @@
-const calculateRating = (ratingList) => {
-	if (!ratingList.length) {
-		return 0;
-	}
-	return Math.round(ratingList.reduce((sum, current) => sum + current, 0) / ratingList.length);
-};
-
 const getRatingElement = ({ book, user, renderPage }) => {
+	const ratingContainer = createElement("div", "book-rating-container");
 	const ratingElement = createElement("div", "book-rating-buttons");
 
 	const userRating = user?.ratings.find((rating) => rating.book.id === book.id);
 
-	const ratingNumber = calculateRating(book.ratings.map(({ rating }) => rating));
+	const ratingNumber = getBookRating(book);
 
 	const addRating = (newRating) => {
 		if (userRating) {
@@ -46,11 +40,25 @@ const getRatingElement = ({ book, user, renderPage }) => {
 		}
 	};
 
+	const ratingText = createElement("p", "rating-text");
+	ratingText.innerText = "Rating:";
+
+	ratingContainer.append(ratingText);
+
 	[1, 2, 3, 4, 5].forEach((starNumber) => {
-		const star = createElement("button", ratingNumber >= starNumber ? "filled-star" : "empty-star");
-		star.addEventListener("click", () => addRating(starNumber));
+		const star = createElement(
+			"button",
+			ratingNumber >= starNumber
+				? `filled-star${user ? "" : "-unresponsive"}`
+				: `empty-star${user ? "" : "-unresponsive"}`
+		);
+		if (user) {
+			star.addEventListener("click", () => addRating(starNumber));
+		}
 		ratingElement.append(star);
 	});
 
-	return ratingElement;
+	ratingContainer.append(ratingElement);
+
+	return ratingContainer;
 };

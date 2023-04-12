@@ -1,6 +1,12 @@
 const getRatingBookFromApiObject = (apiBook) => {
 	const id = apiBook.data.id;
-	const { author, title, published, pages } = (apiBook = apiBook.data.attributes);
+	const { author, title, published, pages } = apiBook.data.attributes;
+	return { id, author, title, published, pages };
+};
+
+const getFavoriteBookFromApiObject = (apiBook) => {
+	const id = apiBook.id;
+	const { author, title, published, pages } = apiBook;
 	return { id, author, title, published, pages };
 };
 
@@ -17,7 +23,6 @@ const fetchUser = async () => {
 		return undefined;
 	}
 	const userData = await fetchData("users", user.id, jwt);
-
 	const ratingsFromApi = await Promise.all(
 		userData.ratings.map((rating) => fetchData("ratings", rating.id, jwt))
 	);
@@ -29,5 +34,6 @@ const fetchUser = async () => {
 		username: userData.username,
 		ratings,
 		token: jwt,
+		favorites: userData.favorites.map(getFavoriteBookFromApiObject),
 	};
 };

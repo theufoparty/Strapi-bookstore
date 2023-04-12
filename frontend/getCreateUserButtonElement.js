@@ -5,6 +5,8 @@ const getCreateUserButton = (renderPage) => {
 		const createUserFormElement = getCreateUserFormElement(renderPage);
 		document.body.innerHTML = "";
 		document.body.append(createUserFormElement);
+		const closeFormButton = getCloseFormButton(renderPage);
+		document.body.append(closeFormButton);
 	});
 
 	return createButton;

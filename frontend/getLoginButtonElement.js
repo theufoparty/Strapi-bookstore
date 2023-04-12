@@ -5,6 +5,8 @@ const getLoginButtonElement = (renderPage) => {
 		const loginFormElement = getLoginFormElement(renderPage);
 		document.body.innerHTML = "";
 		document.body.append(loginFormElement);
+		const closeFormButton = getCloseFormButton(renderPage);
+		document.body.append(closeFormButton);
 	});
 
 	return loginButton;
